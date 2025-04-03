@@ -58,6 +58,8 @@ weather_norm  = weather_n %>%
 #| message: false
 #| warning: false
 
+set.seed(123)
+
 mod_km4 = kmeans(weather_norm,
                  centers = 4,
                  nstart = 10)
@@ -68,7 +70,7 @@ weather %>%
 ```
 
 
-```{r new k number}
+```{r new k number- 5}
 #| message: false
 #| warning: false
 
@@ -77,6 +79,7 @@ mod_km_n = kmeans(weather_norm,
                  nstart = 10)
 ```
 
+k = 5 was selected in the above code following the elbow method since, it is a k value beyond where the elbow was formed.
 
 ## 2. How many observations are there in each cluster?  
 
@@ -89,11 +92,11 @@ weather %>%
   group_by(cluster) %>%
   tally()
 ```
-
+The table above shows that clusters 1 through 5 has the following observations: 236, 56, 208, 182 and 16
 
 ## 3. Using the `fviz_cluster()` function, import here the original plot with k=4 did in class, and the new one with the number of k you selected for this exercise. How do they visually compare? Which one seems to be a better choice, and why?  
 
-```{r fviz_cluster with k= 4}
+```{r fviz_cluster with k- 4}
 #| message: false
 #| warning: false
 
@@ -103,13 +106,15 @@ fviz_cluster(mod_km4,
 ```
 
 
-```{r fviz_cluster with k= 3}
+```{r fviz_cluster with k- 5}
 #| message: false
 #| warning: false
 
 fviz_cluster(mod_km_n,
              data = weather_norm)
 ```
+
+From the two plots, either using k = 4 or k = 5 presents a good clustering. However, k = 5 seems to reveal other groupings and data belonging to similar categories. Exploring higher k numbers or clusters above this does not seem suitable for this data set. 
 
 # Submitting your work  
 Once you have developed all the code and answers, make sure to Render this quarto file.  
